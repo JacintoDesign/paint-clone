@@ -10,9 +10,11 @@ const loadStorageBtn = document.getElementById('load-storage');
 const clearStorageBtn = document.getElementById('clear-storage'); 
 const downloadBtn = document.getElementById('download'); 
 
+// Global Variables
 const canvas = document.getElementById('canvas');
-let canvasContext = canvas.getContext('2d');
+let myCanvas = canvas.getContext('2d');
 let currentSize = 10;
+let bucketColor = 'dodgerblue';
 
 // Setting Brush Size
 brushSlider.addEventListener('change', () => {
@@ -22,4 +24,18 @@ brushSlider.addEventListener('change', () => {
     } else {
         brushSize.innerHTML = brushSlider.value;
     }
+});
+
+// Create New Canvas (on background color change)
+bucketColorBtn.addEventListener('change', () => {
+    bucketColor = `#${bucketColorBtn.value}`;
+    console.log(bucketColor);
+    createCanvas();
 })
+function createCanvas() {
+    myCanvas.fillStyle = bucketColor;
+    myCanvas.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+// On startup, create canvas
+createCanvas();
