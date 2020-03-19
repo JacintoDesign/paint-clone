@@ -6,11 +6,14 @@ body {
     margin: 0;
     background-color: rgb(177, 177, 177);
     font-family: Oswald, sans-serif;
+    overflow: hidden;
 }
 
 .top-bar {
     padding-left: 15px;
     height: 50px;
+    width: 100%;
+    position: fixed;
     background-color: grey;
     display: flex;
     justify-content: center;
@@ -104,7 +107,7 @@ body {
     margin-left: 10px;
 }
 
-#colorpicker {
+#brush-color, #bucket-color {
     border-style: solid;
     border-radius: 5px;
     height: 35px;
@@ -113,4 +116,10 @@ body {
     text-align: center;
     cursor: pointer;
     outline: none;
+}
+
+#canvas {
+    background-color: rgb(177, 177, 177);
+    width: 100%;
+    height: calc(100vh - 50px);
 }
