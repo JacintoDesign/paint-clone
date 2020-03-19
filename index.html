@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paint Clone</title>
+    <link rel="icon" type="image/png" href="https://s2.googleusercontent.com/s2/favicons?domain=www.jacinto.design">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css"/>
+    <script src="jscolor.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <div class="brush tool">
+                <i class="fas fa-brush" title="Brush"></i>
+                <input class="jscolor" value="ab2567" id="colorpicker">
+                <span class="size" title="Brush Size">50</span>
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+            <div class="bucket tool">
+                <i class="fas fa-fill-drip" title="Background Color"></i>
+                <input class="jscolor" value="ffffff" id="colorpicker">
+            </div>
+            <div class="tool">
+                <i class="fas fa-eraser" title="Eraser"></i>
+            </div>
+            <div class="tool">
+                <i class="fas fa-undo-alt" title="Clear"></i>
+            </div>
+            <div class="tool">
+                <i class="fas fa-image" title="Add Image"></i>
+            </div>
+            <div class="tool">
+                <i class="fas fa-download" title="Save Local Storage"></i>
+            </div>
+            <div class="tool">
+                <i class="fas fa-upload" title="Load Local Storage"></i>
+            </div>
+            <div class="tool">
+                <i class="fas fa-trash-alt" title="Clear Local Storage"></i>
+            </div>
+            <div class="tool">
+                <i class="far fa-save" title="Save Image File"></i>
+            </div>
+        </div>
+        <canvas id="canvas"></canvas>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+</body>
+</html>
