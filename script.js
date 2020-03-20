@@ -75,7 +75,8 @@ bucketColorBtn.addEventListener('change', () => {
 // Clear Canvas
 clearCanvasBtn.addEventListener('click', () => {
     createCanvas();
-    activeToolEl.innerText = 'Canvas Cleared!';
+    drawnArray = [];
+    activeToolEl.innerText = 'Canvas Cleared';
     setTimeout(switchToBrush, 1500);
 });
 
@@ -160,3 +161,31 @@ function onMouseUp() {
     isMouseDown = false;
 }
 
+// Save to Local Storage
+saveStorageBtn.addEventListener('click', () => {
+    // Necessary so that you don't keep adding to array
+    localStorage.removeItem('savedCanvas');
+    localStorage.setItem('savedCanvas', JSON.stringify(drawnArray));
+    activeToolEl.innerText = 'Canvas Saved';
+    setTimeout(switchToBrush, 1500);
+});
+
+// Load from Local Storage
+loadStorageBtn.addEventListener('click', () => {
+    if (localStorage.getItem('savedCanvas') !== null) {
+        drawnArray = JSON.parse(localStorage.savedCanvas);
+        restoreCanvas();
+        activeToolEl.innerText = 'Canvas Loaded';
+        setTimeout(switchToBrush, 1500);
+    } else {
+        activeToolEl.innerText = 'No Canvas Found';
+        setTimeout(switchToBrush, 1500);
+    }
+});
+
+// Clear Local Storage
+clearStorageBtn.addEventListener('click', () => {
+    localStorage.clear();
+    activeToolEl.innerText = 'Local Storage Cleared';
+    setTimeout(switchToBrush, 1500);
+});

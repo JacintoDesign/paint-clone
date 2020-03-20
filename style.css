@@ -20,8 +20,9 @@ body {
 }
 
 .active-tool {
-    position: relative;
-    top: 10px;
+    position: absolute;
+    top: 9px;
+    left: 5px;
 }
 
 .active-tool > span {
