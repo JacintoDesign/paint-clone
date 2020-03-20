@@ -19,6 +19,20 @@ body {
     justify-content: center;
 }
 
+.active-tool {
+    position: relative;
+    top: 10px;
+}
+
+.active-tool > span {
+    background-color: rgb(82, 82, 82);
+    border-radius: 5px;
+    padding: 2.5px 16px;
+    color: white;
+    font-size: 20px;
+    user-select: none;
+}
+
 .tool {
     position: relative;
     top: 3px;
@@ -39,10 +53,6 @@ body {
     width: 40px;
     text-align: center;
     cursor: pointer;
-}
-
-.fa-brush, .fa-fill-drip {
-    cursor: default;
 }
 
 .fas:hover, .far:hover {

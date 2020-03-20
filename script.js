@@ -1,4 +1,4 @@
-
+const activeToolEl = document.getElementById('active-tool');
 const brushColorBtn = document.getElementById('brush-color');
 const brushIcon = document.querySelector('.fa-brush');
 const brushSize = document.getElementById('brush-size');
@@ -36,16 +36,20 @@ brushSlider.addEventListener('change', () => {
 });
 
 // Setting Brush Color
-brushColorBtn.addEventListener('change', () => currentColor = `#${brushColorBtn.value}`);
+brushColorBtn.addEventListener('change', () => {
+    currentColor = `#${brushColorBtn.value}`;
+});
 
 // Eraser
 eraser.addEventListener('click', () => {
+    activeToolEl.innerText = 'Eraser';
     currentColor = myCanvas.fillStyle;
     currentSize = 50;
 });
 
 // Switch back to Brush
 brushIcon.addEventListener('click', () => {
+    activeToolEl.innerText = 'Brush';
     currentColor = `#${brushColorBtn.value}`;
     currentSize = 10;
 });
@@ -114,6 +118,8 @@ function onMouseMove(canvas, event) {
         storeDrawn(currentPosition.x, currentPosition.y, currentSize, currentColor);
     }
 }
+
+// TO DO: consider some logic that detects if a line was drawn from eraser, dynamically change items in the drawn array to be whatever the current bucket color is
 
 // Store Drawn Lines in DrawnArray
 function storeDrawn(x, y, size, color) {
