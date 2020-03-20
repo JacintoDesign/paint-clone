@@ -197,4 +197,6 @@ downloadBtn.addEventListener('click', () => downloadCanvas(downloadBtn, 'canvas'
 function downloadCanvas(link, canvas, filename) {
     link.href = document.getElementById(canvas).toDataURL('image/jpeg', 1);
     link.download = filename;
+    activeToolEl.innerText = 'Image File Saved';
+    setTimeout(switchToBrush, 1500);
 }
