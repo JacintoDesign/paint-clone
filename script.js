@@ -46,7 +46,7 @@ bucketColorBtn.addEventListener('change', () => {
 
 function createCanvas() {
     canvas.id = 'canvas';
-    canvas.width = window.innerWidth - 200;
+    canvas.width = window.innerWidth;
     canvas.height = window.innerHeight - 100;
     canvas.style.position = "absolute";
     myCanvas.fillStyle = bucketColor;
@@ -76,7 +76,7 @@ function getMousePosition(canvas, event) {
 }
 
 // Mouse Down
-canvas.addEventListener('mousedown', function() {onMouseDown(canvas, event);});
+canvas.addEventListener('mousedown', () => onMouseDown(canvas, event));
 function onMouseDown(canvas, event) {
     isMouseDown = true;
     var currentPosition = getMousePosition(canvas, event);
@@ -88,7 +88,7 @@ function onMouseDown(canvas, event) {
 }
 
 // Mouse Move
-canvas.addEventListener('mousemove', function() {onMouseMove(canvas, event)});
+canvas.addEventListener('mousemove', () => onMouseMove(canvas, event));
 function onMouseMove(canvas, event) {
     if(isMouseDown == true) {
         var currentPosition = getMousePosition(canvas, event);

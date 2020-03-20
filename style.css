@@ -120,8 +120,8 @@ body {
 
 #canvas {
     background-color: rgb(177, 177, 177);
-    width: 100%;
-    height: calc(100vh - 100px);
+    /* width: 100%;
+    height: calc(100vh - 100px); */
     position: absolute;
     top: 50px;
     cursor: crosshair;
