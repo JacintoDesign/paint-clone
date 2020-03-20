@@ -1,6 +1,6 @@
 const activeToolEl = document.getElementById('active-tool');
 const brushColorBtn = document.getElementById('brush-color');
-const brushIcon = document.querySelector('.fa-brush');
+const brushIcon = document.getElementById('brush');
 const brushSize = document.getElementById('brush-size');
 const brushSlider = document.getElementById('brush-slider');
 const bucketColorBtn = document.getElementById('bucket-color');
@@ -20,6 +20,7 @@ let currentSize = 10;
 let bucketColor = 'white';
 let currentColor = '#AB2567';
 let isMouseDown = false;
+let isEraser = false;
 let drawnArray = [];
 
 // On startup
@@ -37,22 +38,30 @@ brushSlider.addEventListener('change', () => {
 
 // Setting Brush Color
 brushColorBtn.addEventListener('change', () => {
+    isEraser = false;
     currentColor = `#${brushColorBtn.value}`;
 });
 
 // Eraser
 eraser.addEventListener('click', () => {
+    isEraser = true;
+    brushIcon.style.color = 'white';
+    eraser.style.color = 'black';
     activeToolEl.innerText = 'Eraser';
-    currentColor = myCanvas.fillStyle;
+    currentColor = bucketColor;
     currentSize = 50;
 });
 
 // Switch back to Brush
-brushIcon.addEventListener('click', () => {
+brushIcon.addEventListener('click', switchToBrush);
+function switchToBrush() {
+    isEraser = false;
     activeToolEl.innerText = 'Brush';
+    brushIcon.style.color = 'black';
+    eraser.style.color = 'white';
     currentColor = `#${brushColorBtn.value}`;
     currentSize = 10;
-});
+}
 
 // Change Background Color
 bucketColorBtn.addEventListener('change', () => {
@@ -60,6 +69,7 @@ bucketColorBtn.addEventListener('change', () => {
     console.log(bucketColor);
     createCanvas();
     redraw();
+    switchToBrush();
 });
 
 // Create Canvas
@@ -71,16 +81,22 @@ function createCanvas() {
     myCanvas.fillStyle = bucketColor;
     myCanvas.fillRect(0, 0, canvas.width, canvas.height);
     body.appendChild(canvas);
+    switchToBrush();
 }
 
 // Draw what is stored in DrawnArray
 function redraw() {
-    for (var i = 1; i < drawnArray.length; i++) {
+    for (i = 1; i < drawnArray.length; i++) {
         myCanvas.beginPath();
         myCanvas.moveTo(drawnArray[i-1].x, drawnArray[i-1].y);
         myCanvas.lineWidth = drawnArray[i].size;
         myCanvas.lineCap = "round";
-        myCanvas.strokeStyle = drawnArray[i].color;
+        if (drawnArray[i].eraser == true) {
+            // console.log('eraser line');
+            myCanvas.strokeStyle = bucketColor;
+        } else {
+            myCanvas.strokeStyle = drawnArray[i].color;
+        }
         myCanvas.lineTo(drawnArray[i].x, drawnArray[i].y);
         myCanvas.stroke();
     }
@@ -114,21 +130,20 @@ function onMouseMove(canvas, event) {
         var currentPosition = getMousePosition(canvas, event);
         myCanvas.lineTo(currentPosition.x, currentPosition.y);
         myCanvas.stroke();
-        console.log('stroke');
-        storeDrawn(currentPosition.x, currentPosition.y, currentSize, currentColor);
+        storeDrawn(currentPosition.x, currentPosition.y, currentSize, currentColor, isEraser);
     }
 }
 
-// TO DO: consider some logic that detects if a line was drawn from eraser, dynamically change items in the drawn array to be whatever the current bucket color is
-
 // Store Drawn Lines in DrawnArray
-function storeDrawn(x, y, size, color) {
+function storeDrawn(x, y, size, color, eraser) {
     var line = {
         "x": x,
         "y": y,
         "size": size,
-        "color": color
+        "color": color,
+        "eraser": eraser
     }
+    // console.log(line);
     drawnArray.push(line);
 }
 

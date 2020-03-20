@@ -59,6 +59,10 @@ body {
     filter: brightness(90%);
 }
 
+.fa-fill-drip {
+    cursor: default;
+}
+
 .brush {
     /* add background color in js, on active */
     background-color: rgb(114, 114, 114);
