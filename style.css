@@ -63,6 +63,10 @@ body {
     cursor: default;
 }
 
+.fa-undo-alt:hover, .fa-trash-alt:hover {
+    color: rgb(223, 37, 37);
+}
+
 .brush {
     /* add background color in js, on active */
     background-color: rgb(114, 114, 114);

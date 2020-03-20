@@ -6,7 +6,7 @@ const brushSlider = document.getElementById('brush-slider');
 const bucketColorBtn = document.getElementById('bucket-color');
 const eraser = document.getElementById('eraser'); 
 const clearCanvasBtn = document.getElementById('clear-canvas'); 
-const addImageBtn = document.getElementById('add-image'); 
+// const addImageBtn = document.getElementById('add-image'); 
 const saveStorageBtn = document.getElementById('save-storage'); 
 const loadStorageBtn = document.getElementById('load-storage'); 
 const clearStorageBtn = document.getElementById('clear-storage'); 
@@ -68,8 +68,15 @@ bucketColorBtn.addEventListener('change', () => {
     bucketColor = `#${bucketColorBtn.value}`;
     console.log(bucketColor);
     createCanvas();
-    redraw();
+    restoreCanvas();
     switchToBrush();
+});
+
+// Clear Canvas
+clearCanvasBtn.addEventListener('click', () => {
+    createCanvas();
+    activeToolEl.innerText = 'Canvas Cleared!';
+    setTimeout(switchToBrush, 1500);
 });
 
 // Create Canvas
@@ -77,7 +84,7 @@ function createCanvas() {
     canvas.id = 'canvas';
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight - 50;
-    canvas.style.position = "absolute";
+    canvas.style.position = 'absolute';
     myCanvas.fillStyle = bucketColor;
     myCanvas.fillRect(0, 0, canvas.width, canvas.height);
     body.appendChild(canvas);
@@ -85,12 +92,12 @@ function createCanvas() {
 }
 
 // Draw what is stored in DrawnArray
-function redraw() {
+function restoreCanvas() {
     for (i = 1; i < drawnArray.length; i++) {
         myCanvas.beginPath();
         myCanvas.moveTo(drawnArray[i-1].x, drawnArray[i-1].y);
         myCanvas.lineWidth = drawnArray[i].size;
-        myCanvas.lineCap = "round";
+        myCanvas.lineCap = 'round';
         if (drawnArray[i].eraser == true) {
             // console.log('eraser line');
             myCanvas.strokeStyle = bucketColor;
@@ -119,7 +126,7 @@ function onMouseDown(canvas, event) {
     myCanvas.moveTo(currentPosition.x, currentPosition.y);
     myCanvas.beginPath();
     myCanvas.lineWidth = currentSize;
-    myCanvas.lineCap = "round";
+    myCanvas.lineCap = 'round';
     myCanvas.strokeStyle = currentColor;
 }
 
@@ -137,11 +144,11 @@ function onMouseMove(canvas, event) {
 // Store Drawn Lines in DrawnArray
 function storeDrawn(x, y, size, color, eraser) {
     var line = {
-        "x": x,
-        "y": y,
-        "size": size,
-        "color": color,
-        "eraser": eraser
+        'x': x,
+        'y': y,
+        'size': size,
+        'color': color,
+        'eraser': eraser
     }
     // console.log(line);
     drawnArray.push(line);
