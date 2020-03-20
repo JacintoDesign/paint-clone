@@ -134,11 +134,13 @@ function onMouseDown(canvas, event) {
 // Mouse Move
 canvas.addEventListener('mousemove', () => onMouseMove(canvas, event));
 function onMouseMove(canvas, event) {
-    if(isMouseDown == true) {
+    if (isMouseDown == true) {
         var currentPosition = getMousePosition(canvas, event);
         myCanvas.lineTo(currentPosition.x, currentPosition.y);
         myCanvas.stroke();
         storeDrawn(currentPosition.x, currentPosition.y, currentSize, currentColor, isEraser);
+    } else {
+        storeDrawn(undefined, undefined, undefined, undefined, undefined);
     }
 }
 
@@ -189,3 +191,10 @@ clearStorageBtn.addEventListener('click', () => {
     activeToolEl.innerText = 'Local Storage Cleared';
     setTimeout(switchToBrush, 1500);
 });
+
+// Download Image
+downloadBtn.addEventListener('click', () => downloadCanvas(downloadBtn, 'canvas', 'paint-example.jpeg'));
+function downloadCanvas(link, canvas, filename) {
+    link.href = document.getElementById(canvas).toDataURL('image/jpeg', 1);
+    link.download = filename;
+}
