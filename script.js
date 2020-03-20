@@ -1,4 +1,6 @@
+
 const brushColorBtn = document.getElementById('brush-color');
+const brushIcon = document.querySelector('.fa-brush');
 const brushSize = document.getElementById('brush-size');
 const brushSlider = document.getElementById('brush-slider');
 const bucketColorBtn = document.getElementById('bucket-color');
@@ -36,6 +38,18 @@ brushSlider.addEventListener('change', () => {
 // Setting Brush Color
 brushColorBtn.addEventListener('change', () => currentColor = `#${brushColorBtn.value}`);
 
+// Eraser
+eraser.addEventListener('click', () => {
+    currentColor = myCanvas.fillStyle;
+    currentSize = 50;
+});
+
+// Switch back to Brush
+brushIcon.addEventListener('click', () => {
+    currentColor = `#${brushColorBtn.value}`;
+    currentSize = 10;
+});
+
 // Change Background Color
 bucketColorBtn.addEventListener('change', () => {
     bucketColor = `#${bucketColorBtn.value}`;
@@ -48,7 +62,7 @@ bucketColorBtn.addEventListener('change', () => {
 function createCanvas() {
     canvas.id = 'canvas';
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 100;
+    canvas.height = window.innerHeight - 50;
     canvas.style.position = "absolute";
     myCanvas.fillStyle = bucketColor;
     myCanvas.fillRect(0, 0, canvas.width, canvas.height);
