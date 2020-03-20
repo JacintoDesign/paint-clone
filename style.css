@@ -124,4 +124,6 @@ body {
     height: calc(100vh - 100px);
     position: absolute;
     top: 50px;
+    cursor: crosshair;
+    z-index: 10;
 }
