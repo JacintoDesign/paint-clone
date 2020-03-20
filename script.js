@@ -18,7 +18,7 @@ let currentSize = 10;
 let bucketColor = 'white';
 let currentColor = '#AB2567';
 let isMouseDown = false;
-let linesArray = [];
+let drawnArray = [];
 
 // On startup
 createCanvas();
@@ -41,9 +41,10 @@ bucketColorBtn.addEventListener('change', () => {
     bucketColor = `#${bucketColorBtn.value}`;
     console.log(bucketColor);
     createCanvas();
-    // redraw();
+    redraw();
 });
 
+// Create Canvas
 function createCanvas() {
     canvas.id = 'canvas';
     canvas.width = window.innerWidth;
@@ -54,17 +55,18 @@ function createCanvas() {
     body.appendChild(canvas);
 }
 
-// function redraw() {
-//     for (var i = 1; i < linesArray.length; i++) {
-//         myCanvas.beginPath();
-//         myCanvas.moveTo(linesArray[i-1].x, linesArray[i-1].y);
-//         myCanvas.lineWidth = linesArray[i].size;
-//         myCanvas.lineCap = "round";
-//         myCanvas.strokeStyle = linesArray[i].color;
-//         myCanvas.lineTo(linesArray[i].x, linesArray[i].y);
-//         myCanvas.stroke();
-//     }
-// }
+// Draw what is stored in DrawnArray
+function redraw() {
+    for (var i = 1; i < drawnArray.length; i++) {
+        myCanvas.beginPath();
+        myCanvas.moveTo(drawnArray[i-1].x, drawnArray[i-1].y);
+        myCanvas.lineWidth = drawnArray[i].size;
+        myCanvas.lineCap = "round";
+        myCanvas.strokeStyle = drawnArray[i].color;
+        myCanvas.lineTo(drawnArray[i].x, drawnArray[i].y);
+        myCanvas.stroke();
+    }
+}
 
 // Get Mouse Position
 function getMousePosition(canvas, event) {
@@ -95,21 +97,20 @@ function onMouseMove(canvas, event) {
         myCanvas.lineTo(currentPosition.x, currentPosition.y);
         myCanvas.stroke();
         console.log('stroke');
-        // store(currentPosition.x, currentPosition.y, currentSize, currentColor);
+        storeDrawn(currentPosition.x, currentPosition.y, currentSize, currentColor);
     }
 }
 
-// function store(x, y, s, c) {
-//     var line = {
-//         "x": x,
-//         "y": y,
-//         "size": s,
-//         "color": c
-//     }
-//     linesArray.push(line);
-//     console.log(linesArray);
-// }
-
+// Store Drawn Lines in DrawnArray
+function storeDrawn(x, y, size, color) {
+    var line = {
+        "x": x,
+        "y": y,
+        "size": size,
+        "color": color
+    }
+    drawnArray.push(line);
+}
 
 // Mouse Up
 canvas.addEventListener('mouseup', onMouseUp);
