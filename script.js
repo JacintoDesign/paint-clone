@@ -15,7 +15,7 @@ const body = document.querySelector('body');
 
 // Global Variables
 let canvas = document.createElement('canvas');
-let myCanvas = canvas.getContext('2d');
+let context = canvas.getContext('2d');
 let currentSize = 10;
 let bucketColor = 'white';
 let currentColor = '#A51DAB';
@@ -86,8 +86,8 @@ function createCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight - 50;
     canvas.style.position = 'absolute';
-    myCanvas.fillStyle = bucketColor;
-    myCanvas.fillRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = bucketColor;
+    context.fillRect(0, 0, canvas.width, canvas.height);
     body.appendChild(canvas);
     switchToBrush();
 }
@@ -95,18 +95,18 @@ function createCanvas() {
 // Draw what is stored in DrawnArray
 function restoreCanvas() {
     for (i = 1; i < drawnArray.length; i++) {
-        myCanvas.beginPath();
-        myCanvas.moveTo(drawnArray[i-1].x, drawnArray[i-1].y);
-        myCanvas.lineWidth = drawnArray[i].size;
-        myCanvas.lineCap = 'round';
+        context.beginPath();
+        context.moveTo(drawnArray[i-1].x, drawnArray[i-1].y);
+        context.lineWidth = drawnArray[i].size;
+        context.lineCap = 'round';
         if (drawnArray[i].eraser == true) {
             // console.log('eraser line');
-            myCanvas.strokeStyle = bucketColor;
+            context.strokeStyle = bucketColor;
         } else {
-            myCanvas.strokeStyle = drawnArray[i].color;
+            context.strokeStyle = drawnArray[i].color;
         }
-        myCanvas.lineTo(drawnArray[i].x, drawnArray[i].y);
-        myCanvas.stroke();
+        context.lineTo(drawnArray[i].x, drawnArray[i].y);
+        context.stroke();
     }
 }
 
@@ -124,11 +124,11 @@ canvas.addEventListener('mousedown', () => onMouseDown(canvas, event));
 function onMouseDown(canvas, event) {
     isMouseDown = true;
     var currentPosition = getMousePosition(canvas, event);
-    myCanvas.moveTo(currentPosition.x, currentPosition.y);
-    myCanvas.beginPath();
-    myCanvas.lineWidth = currentSize;
-    myCanvas.lineCap = 'round';
-    myCanvas.strokeStyle = currentColor;
+    context.moveTo(currentPosition.x, currentPosition.y);
+    context.beginPath();
+    context.lineWidth = currentSize;
+    context.lineCap = 'round';
+    context.strokeStyle = currentColor;
 }
 
 // Mouse Move
@@ -136,8 +136,8 @@ canvas.addEventListener('mousemove', () => onMouseMove(canvas, event));
 function onMouseMove(canvas, event) {
     if (isMouseDown == true) {
         var currentPosition = getMousePosition(canvas, event);
-        myCanvas.lineTo(currentPosition.x, currentPosition.y);
-        myCanvas.stroke();
+        context.lineTo(currentPosition.x, currentPosition.y);
+        context.stroke();
         storeDrawn(currentPosition.x, currentPosition.y, currentSize, currentColor, isEraser);
     } else {
         storeDrawn(undefined, undefined, undefined, undefined, undefined);
