@@ -29,12 +29,17 @@ createCanvas();
 // Setting Brush Size
 brushSlider.addEventListener('change', () => {
     currentSize = brushSlider.value;
+    displayBrushSize();
+});
+
+// Formatting Brush Size
+function displayBrushSize() {
     if (brushSlider.value < 10) {
         brushSize.innerHTML = `0${brushSlider.value}`;
     } else {
         brushSize.innerHTML = brushSlider.value;
     }
-});
+}
 
 // Setting Brush Color
 brushColorBtn.addEventListener('change', () => {
@@ -61,6 +66,8 @@ function switchToBrush() {
     eraser.style.color = 'white';
     currentColor = `#${brushColorBtn.value}`;
     currentSize = 10;
+    brushSlider.value = 10;
+    displayBrushSize();
 }
 
 // Change Background Color
