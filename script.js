@@ -134,7 +134,7 @@ function getMousePosition(event) {
 }
 
 // Mouse Down
-function onMouseDown(event) {
+canvas.addEventListener('mousedown', (event) => {
   isMouseDown = true;
   const currentPosition = getMousePosition(event);
   context.moveTo(currentPosition.x, currentPosition.y);
@@ -142,10 +142,10 @@ function onMouseDown(event) {
   context.lineWidth = currentSize;
   context.lineCap = 'round';
   context.strokeStyle = currentColor;
-}
+});
 
 // Mouse Move
-function onMouseMove(event) {
+canvas.addEventListener('mousemove', (event) => {
   if (isMouseDown === true) {
     const currentPosition = getMousePosition(event);
     context.lineTo(currentPosition.x, currentPosition.y);
@@ -160,12 +160,12 @@ function onMouseMove(event) {
   } else {
     storeDrawn(undefined, undefined, undefined, undefined, undefined);
   }
-}
+});
 
 // Mouse Up
-function onMouseUp() {
+canvas.addEventListener('mouseup', () => {
   isMouseDown = false;
-}
+});
 
 // Save to Local Storage
 saveStorageBtn.addEventListener('click', () => {
@@ -197,19 +197,15 @@ clearStorageBtn.addEventListener('click', () => {
 });
 
 // Download Image
-function downloadCanvas(link, filename) {
-  link.href = canvas.toDataURL('image/jpeg', 1);
-  link.download = filename;
+downloadBtn.addEventListener('click', () => {
+  downloadBtn.href = canvas.toDataURL('image/jpeg', 1);
+  downloadBtn.download = 'paint-example.jpeg';
   activeToolEl.textContent = 'Image File Saved';
   setTimeout(switchToBrush, 1500);
-}
+});
 
 // Event Listeners
 brushIcon.addEventListener('click', switchToBrush);
-canvas.addEventListener('mousedown', () => onMouseDown(event));
-canvas.addEventListener('mousemove', () => onMouseMove(event));
-canvas.addEventListener('mouseup', onMouseUp);
-downloadBtn.addEventListener('click', () => downloadCanvas(downloadBtn, 'paint-example.jpeg'));
 
 // On Load
 createCanvas();
