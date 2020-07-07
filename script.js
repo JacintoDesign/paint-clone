@@ -25,9 +25,9 @@ let drawnArray = [];
 // Formatting Brush Size
 function displayBrushSize() {
   if (brushSlider.value < 10) {
-    brushSize.innerHTML = `0${brushSlider.value}`;
+    brushSize.textContent = `0${brushSlider.value}`;
   } else {
-    brushSize.innerHTML = brushSlider.value;
+    brushSize.textContent = brushSlider.value;
   }
 }
 
