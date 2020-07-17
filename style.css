@@ -21,30 +21,7 @@ body {
   justify-content: center;
 }
 
-.active-tool {
-  position: absolute;
-  top: 9px;
-  left: 5px;
-}
-
-.active-tool > span {
-  background-color: rgb(82, 82, 82);
-  border-radius: 5px;
-  padding: 2.5px 16px;
-  color: white;
-  font-size: 20px;
-  user-select: none;
-}
-
-.tool {
-  position: relative;
-  top: 3px;
-}
-
-.tool:not(:first-child) {
-  margin-left: 8px;
-}
-
+/* Font Awesome Icons */
 .fas,
 .far {
   font-size: 25px;
@@ -73,11 +50,39 @@ body {
   color: rgb(223, 37, 37);
 }
 
+/* Tools */
+.active-tool {
+  position: absolute;
+  top: 9px;
+  left: 5px;
+}
+
+.active-tool > span {
+  background-color: rgb(82, 82, 82);
+  border-radius: 5px;
+  padding: 2.5px 16px;
+  color: white;
+  font-size: 20px;
+  user-select: none;
+}
+
+.tool {
+  position: relative;
+  top: 3px;
+}
+
+.tool:not(:first-child) {
+  margin-left: 8px;
+}
+
 .brush {
-  /* add background color in js, on active */
   background-color: rgb(114, 114, 114);
   height: 44px;
   width: 345px;
+}
+
+.brush > * {
+  margin-left: 10px;
 }
 
 .size {
@@ -127,10 +132,7 @@ body {
   background: rgb(47, 47, 47);
 }
 
-.brush > * {
-  margin-left: 10px;
-}
-
+/* JS Color */
 .jscolor {
   border-style: solid;
   border-radius: 5px;
@@ -142,11 +144,9 @@ body {
   outline: none;
 }
 
-canvas {
+/* Canvas */
+canvas#canvas {
   background-color: rgb(177, 177, 177);
-
-  /* width: 100%;
-    height: calc(100vh - 100px); */
   position: absolute;
   top: 50px;
   cursor: crosshair;
